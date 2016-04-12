@@ -80,7 +80,7 @@ function syncSidebar() {
   });
 
 // Loop through BIKE RACK layer and add only features which are in the map bounds
-  bikerack.eachLayer(function (layer) {
+  bike_rack.eachLayer(function (layer) {
     if (map.hasLayer(bike_rackLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
         $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/bike_rack.png"></td><td class="feature-address">' + layer.feature.properties.ADDRESS + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
@@ -153,77 +153,77 @@ var subwayLines = L.geoJson(null, {
     if (feature.properties.route_id === "1" || feature.properties.route_id === "2" || feature.properties.route_id === "3") {
       return {
         color: "#ff3135",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
     if (feature.properties.route_id === "4" || feature.properties.route_id === "5" || feature.properties.route_id === "6") {
       return {
         color: "#009b2e",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
     if (feature.properties.route_id === "7") {
       return {
         color: "#ce06cb",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
     if (feature.properties.route_id === "A" || feature.properties.route_id === "C" || feature.properties.route_id === "E" || feature.properties.route_id === "SI" || feature.properties.route_id === "H") {
       return {
         color: "#fd9a00",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
     if (feature.properties.route_id === "Air") {
       return {
         color: "#ffff00",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
     if (feature.properties.route_id === "B" || feature.properties.route_id === "D" || feature.properties.route_id === "F" || feature.properties.route_id === "M") {
       return {
         color: "#ffff00",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
     if (feature.properties.route_id === "G") {
       return {
         color: "#9ace00",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
     if (feature.properties.route_id === "FS" || feature.properties.route_id === "GS") {
       return {
         color: "#6e6e6e",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
     if (feature.properties.route_id === "J" || feature.properties.route_id === "Z") {
       return {
         color: "#976900",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
     if (feature.properties.route_id === "L") {
       return {
         color: "#969696",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
     if (feature.properties.route_id === "N" || feature.properties.route_id === "Q" || feature.properties.route_id === "R") {
       return {
         color: "#ffff00",
-        weight: 2,
+        weight: 1.5,
         opacity: 1
       };
     }
@@ -236,7 +236,6 @@ var subwayLines = L.geoJson(null, {
           $("#feature-title").html(feature.properties.Line);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
-
         }
       });
     }
@@ -281,16 +280,16 @@ var bench = L.geoJson(null, {
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
-      title: feature.properties.ADDRESS,
+      title: feature.properties.name,
       riseOnHover: true
     });
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS + "</td></tr>" + "<tr><th>Community</th><td>" + feature.properties.COMMUNITY + "</td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS + "</td></tr>" + "<tr><th>Number of features</th><td>" + feature.properties.NUM_OF + "</td></tr>" + "<tr><th>Neighborhood</th><td>" + feature.properties.COMMUNITY + "</td></tr>" + "<table>";
       layer.on({
         click: function (e) {
-          $("#feature-title").html(feature.properties.ADDRESS);
+          $("#feature-title").html(feature.properties.name);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
@@ -307,7 +306,7 @@ var bench = L.geoJson(null, {
     }
   }
 });
-$.getJSON("bench.geojson", function (data) {
+$.getJSON("data/bench.geojson", function (data) {
   bench.addData(data);
   map.addLayer(benchLayer);
 });
@@ -323,16 +322,16 @@ var bike_rack = L.geoJson(null, {
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
-      title: feature.properties.ADDRESS,
+      title: feature.properties.name,
       riseOnHover: true
     });
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS + "</td></tr>" + "<tr><th>Community</th><td>" + feature.properties.COMMUNITY + "</td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Address</th><td>" + feature.properties.address + "<tr><th>Number of features</th><td>" + feature.properties.NUM_OF + "</td></tr>" + "<tr><th>Neighborhood</th><td>" + feature.properties.community + "</td></tr>" + "</table>";
       layer.on({
         click: function (e) {
-          $("#feature-title").html(feature.properties.ADDRESS);
+          $("#feature-title").html(feature.properties.name);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
@@ -477,11 +476,6 @@ var groupedOverlays = {
 var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
   collapsed: isCollapsed
 }).addTo(map);
-
-// Highlight search box text on click
-$("#searchbox").click(function () {
-  $(this).select();
-});
 
 // Prevent hitting enter from refreshing the page
 $("#searchbox").keypress(function (e) {

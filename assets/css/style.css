@@ -9,6 +9,7 @@ body {
 }
 input[type="radio"], input[type="checkbox"] {
   margin: 0;
+  border-radius:0;
 }
 #sidebar {
   width: 250px;
@@ -48,9 +49,6 @@ input[type="radio"], input[type="checkbox"] {
 .progress-bar-full {
   width: 100%;
 }
-.white {
-  color: #FFFFFF;
-}
 .feature-row {
   cursor: pointer;
 }
@@ -58,6 +56,7 @@ input[type="radio"], input[type="checkbox"] {
   width: 100%;
   height: 100%;
   position: relative;
+  border-radius: 0px;
 }
 .sidebar-table {
   position: absolute;
@@ -65,6 +64,7 @@ input[type="radio"], input[type="checkbox"] {
   top: 103px;
   bottom: 0px;
   overflow: auto;
+  border-radius: 0px;
 }
 .leaflet-control-layers {
   overflow: auto;
@@ -81,7 +81,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 .navbar .navbar-brand {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 20px;
   color: #FFFFFF;
 }
 .navbar-collapse.in {
